@@ -5,7 +5,9 @@
   "main": "hello.js",
   "dependencies": {
     "express": "^4.15.2",
-    "shelljs": "^0.7.7"
+    "koa": "^2.5.0",
+    "shelljs": "^0.7.7",
+    "supports-color": "^5.2.0"
   },
   "bin": {
     "hello": "hello"
