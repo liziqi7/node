@@ -1,11 +1,11 @@
 'use strict';
 var crypto=require('crypto');
 
-// var hash=crypto.createHash('sha1');
+var hash=crypto.createHash('sha1');
 
-// hash.update('nodejs');
+hash.update('nodejs');
 
-// console.log(hash.digest('hex'));
+console.log(hash.digest('hex'));
 
 
 
