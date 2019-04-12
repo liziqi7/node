@@ -9,22 +9,3 @@ function greet(name) {
 
 module.exports = greet;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-// console.log("Hello World");
-// console.log('hello', process.argv);
-// 
-//
-//  
-//

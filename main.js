@@ -2,6 +2,6 @@
 
 var greet=require('./hello');
 
-var s='Mark';
+var s='Mark Rose~';
 
 greet(s);
