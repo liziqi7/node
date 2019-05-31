@@ -30,9 +30,9 @@ conn.connect(err => {
       console.log(err);
       throw err;
     }
-    conn.query(INSERT_SQL, 'hello', (err,res) => {
+    conn.query(INSERT_SQL, 'hello', (err, res) => {
       console.log(res);
-      conn.query(SELECT_SQL, (err,res) => {
+      conn.query(SELECT_SQL, (err, res) => {
         console.log(res);
       });
     });
