@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Chat</title>
+  </head>
+  <body>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
+    <script src="https://cdn.bootcss.com/axios/0.19.0-beta.1/axios.min.js"></script>
+    <script src="https://cdn.bootcss.com/socket.io/2.2.0/socket.io.js"></script>
+    <div id="app">
+      <input type="text" v-model="message" />
+      <input type="button" value="发送" v-on:click="send" />
+      <input type="button" value="清空" v-on:click="clear" />
+      <div v-for="item in list">{{ item }}</div>
+    </div>
+    <script>
+      var host = 'http://localhost:3004';
+      var app = new Vue({
+        el: '#app',
+        data: {
+          list: [],
+          message: 'Hello Vue!'
+        },
+        methods: {
+          send: async function() {
+            let res = await axios.post(host + '/send', {
+              message: this.message
+            });
+            this.list = res.data;
+            // const socket = io(host);
+            // socket.emit('chat', this.message);
+          },
+          clear: async function() {
+            let res = await axios.get(host + '/clear');
+            this.list = res.data;
+            // const socket = io(host);
+            // socket.emit('clear');
+          },
+          get: async function() {
+            let res = await axios.get(host + '/list');
+            this.list = res.data;
+          }
+        },
+        mounted() {
+          //   var t = this;
+          //   setInterval(async () => {
+          //     t.get();
+          //   }, 1000);
+
+          const socket = io(host);
+          socket.on('chat', list => {
+            this.list = list;
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
