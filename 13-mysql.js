@@ -30,7 +30,11 @@ conn.connect(err => {
       console.log(err);
       throw err;
     }
-    conn.query(INSERT_SQL, 'hello', (err, res) => {
+    // 插入数据
+    const sql=mysql.format(INSERT_SQL, 'hello');
+    console.log(sql);
+    
+    conn.query(sql, (err, res) => {
       console.log(res);
       conn.query(SELECT_SQL, (err, res) => {
         console.log(res);
