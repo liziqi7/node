@@ -77,44 +77,19 @@ Fruit.sync({ force: true })
     });
   })
   .then(async () => {
+    const Op = Sequelize.Op;
     // 查询
-    const fruits = await Fruit.findAll();
-    Fruit.findAll().then(fruit => {
-      console.log(JSON.stringify(fruit));
-
-      // 更新方法1
-      //   fruit[0].amout = "100kg";
-      //   fruit[0].save();
-
-      //   console.log(fruit[0].totalPrice(50));
-
-      // 数据查询
-      // id
-      // Fruit.findById(1)
-      // 条件 where
-      // get 将数据转化为JSON对象
-      Fruit.findOne({ where: { name: '香蕉' } }).then(fruit => console.log(fruit.get()));
-      // 查询操作符
-      const Op = Sequelize.Op;
-      Fruit.findAll({
-        where: {
-          price: {
-            // 小于5
-            [Op.lt]: 5
-          }
-        }
-      }).then(fruits => console.log(fruits[0].get()));
-
-      // 聚合
-      Fruit.max('price');
-      Fruit.sum('price');
-
-      //更新方法2
-      Fruit.update({ price: 5 }, { where: { id: 1 } });
-
-      // 删除
-        // Fruit.destroy({ where: { id: 1 } });
+    const fruits = await Fruit.findAll({
+      where: {
+        price: { [Op.lt]: 5 }
+      }
     });
+    // console.log(fruits[0].get());
+
+    await Fruit.update({ price: 5 }, { where: { id: 1 } });
+
+    // 删除
+    await Fruit.destroy({ where: { id: 1 } });
   })
   .catch(err => {
     console.log(err.message);
